@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.CircularProgressIndicator
@@ -15,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import com.android.composemvi.ui.home.HomeViewModel
 import com.android.composemvi.ui.home.RestaurantItemUI
 import com.android.composemvi.ui.theme.ComposeMviAppTheme
@@ -38,12 +40,14 @@ class MainActivity : ComponentActivity() {
                             modifier = Modifier.align(Alignment.CenterHorizontally)
                         )
                     }
-                    LazyColumn() {
+                    LazyColumn(
+                        modifier = Modifier.padding(16.dp)
+                    ) {
                         restaurantList?.let {
                             items(items = restaurantList) {
                                 RestaurantItemUI(
                                     restaurantDomain = it,
-                                    backgroundColor = Color.Gray,
+                                    backgroundColor = Color.White,
                                 )
                             }
                         }

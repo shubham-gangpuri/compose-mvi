@@ -7,7 +7,6 @@ import javax.inject.Inject
 class RestaurantListUseCase @Inject constructor(
     private val restaurantListRepo: RestaurantListRepo
 ) {
-
     suspend operator fun invoke(): Resource<RestaurantsDomainDto> =
         restaurantListRepo.getRestaurantList()
 
