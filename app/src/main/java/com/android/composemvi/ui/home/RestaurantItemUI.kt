@@ -25,6 +25,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
@@ -63,7 +64,7 @@ fun RestaurantItemUI(
                         drawContent()
                         drawRect(gradient, blendMode = BlendMode.Multiply)
                     }
-                },
+                }.testTag("restImg"),
             error = painterResource(R.drawable.ic_launcher_background)
         )
         Column(modifier = Modifier.padding(8.dp)) {
