@@ -14,7 +14,6 @@ import androidx.compose.material.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.android.composemvi.ui.home.HomeViewModel
@@ -44,10 +43,14 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier.padding(16.dp)
                     ) {
                         restaurantList?.let {
-                            items(items = restaurantList) {
+                            items(items = restaurantList) { item ->
                                 RestaurantItemUI(
-                                    restaurantDomain = it,
+                                    restaurantDomain = item,
                                     backgroundColor = Color.White,
+                                    checked = item.isChecked,
+                                    onCheckedChange = { restaurantId, checked ->
+                                        viewModel.changeRestChecked(restaurantId, checked)
+                                    }
                                 )
                             }
                         }

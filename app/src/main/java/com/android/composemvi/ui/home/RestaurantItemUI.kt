@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Checkbox
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -37,7 +36,9 @@ import com.android.composemvi.ui.theme.Typography
 fun RestaurantItemUI(
     restaurantDomain: RestaurantDomain,
     backgroundColor: Color,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    checked: Boolean,
+    onCheckedChange: (Long, Boolean) -> Unit
 ) {
     Box(
         modifier = modifier
@@ -64,7 +65,8 @@ fun RestaurantItemUI(
                         drawContent()
                         drawRect(gradient, blendMode = BlendMode.Multiply)
                     }
-                }.testTag("restImg"),
+                }
+                .testTag("restImg"),
             error = painterResource(R.drawable.ic_launcher_background)
         )
         Column(modifier = Modifier.padding(8.dp)) {
@@ -75,15 +77,18 @@ fun RestaurantItemUI(
                 modifier = Modifier.padding(bottom = 2.dp)
             )
             Text(
-                text = restaurantDomain.restaurantName ,
+                text = restaurantDomain.restaurantName,
                 color = White,
                 fontSize = Typography.h5.fontSize
             )
         }
         CustomCheckbox(
-            checked = restaurantDomain.isChecked,
-            onCheckedChange = { restaurantDomain.isChecked = it },
-            modifier = Modifier.align(alignment = Alignment.BottomEnd)
+            checked = checked,
+            onCheckedChange = { checked ->
+                onCheckedChange(restaurantDomain.restaurantId, checked)
+            },
+            modifier = Modifier
+                .align(alignment = Alignment.BottomEnd)
                 .padding(8.dp)
         )
     }
@@ -95,6 +100,8 @@ fun CustomCheckbox(checked: Boolean, onCheckedChange: (Boolean) -> Unit, modifie
         imageVector = if (checked) Icons.Default.Star else Icons.Outlined.Star,
         contentDescription = "Custom Checkbox",
         tint = if (checked) Color.Red else Color.White,
-        modifier = modifier.clickable { onCheckedChange(!checked) }.size(40.dp)
+        modifier = modifier
+            .clickable { onCheckedChange(!checked) }
+            .size(40.dp)
     )
 }

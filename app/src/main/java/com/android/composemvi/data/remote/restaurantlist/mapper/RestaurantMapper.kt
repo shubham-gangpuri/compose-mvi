@@ -9,14 +9,15 @@ fun RestaurantsDto.toRestaurantsDomainDto(): RestaurantsDomainDto {
         RestaurantDomain(
             restaurantId = it.restaurantId,
             coverImage = it.coverImage,
-            restaurantName = it.restaurantName?:"",
+            restaurantName = it.restaurantName ?: "",
             openStatus = it.isOpen?.let { open ->
                 if (open) {
                     "OPEN"
                 } else {
                     "CLOSED"
-                }}?:"UNKNOWN",
-        minimumOrder = it.minimumOrder
+                }
+            } ?: "UNKNOWN",
+            minimumOrder = it.minimumOrder
         )
     })
 }

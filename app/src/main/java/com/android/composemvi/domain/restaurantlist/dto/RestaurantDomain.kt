@@ -1,7 +1,7 @@
 package com.android.composemvi.domain.restaurantlist.dto
 
 data class RestaurantDomain(
-    val restaurantId: Long? = null,
+    val restaurantId: Long,
     val coverImage: String? = null,
     val restaurantName: String,
     val openStatus: String,

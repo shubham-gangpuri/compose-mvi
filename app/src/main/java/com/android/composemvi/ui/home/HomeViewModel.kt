@@ -29,8 +29,8 @@ class HomeViewModel @Inject constructor(
                 isLoading = true,
                 error = null
             )
-            state = when(val result = restaurantListUseCase()){
-                is Resource.Success ->{
+            state = when (val result = restaurantListUseCase()) {
+                is Resource.Success -> {
                     state.copy(
                         isLoading = false,
                         restaurantsDomainDto = result.data
@@ -46,6 +46,13 @@ class HomeViewModel @Inject constructor(
                 }
             }
         }
+    }
+
+    fun changeRestChecked(restaurantId: Long, checked: Boolean) {
+        state.restaurantsDomainDto?.restaurantDomain?.find { it.restaurantId == restaurantId }
+            ?.let { item ->
+                item.isChecked = checked
+            }
     }
 
 }
